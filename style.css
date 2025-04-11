@@ -1,0 +1,846 @@
+/*
+Theme Name: Studio O'Riley Theme
+Theme URI: https://studiooriley.com/studiooriley_theme
+Author: Liam O'Riley
+Author URI: https://studiooriley.com
+Description: A custom theme built for client projects.
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: studiooriley-theme
+*/
+
+/* ######## VARIABLES ######## */
+
+:root {
+    --gradient-primary: 
+    background: linear-gradient(200deg,
+		#4f5bd5, /* DARKER BLUE */
+		#962fbf, /* PURPLE */
+		#4f5bd5, /* DARKER BLUE */
+		#d62976, /* DARK RED */
+		#4f5bd5, /* DARKER BLUE */ 
+		#009688 /* DEEP GREEN */);
+  }
+
+/* Global Styles */
+
+* {
+    box-sizing: border-box;
+}
+
+/* ######## LINKS ######## */
+
+article p a, 
+p > a, 
+li > a, 
+span > a, 
+button > a,
+h1 > a, 
+h2 > a, 
+h3 > a, 
+h4 > a, 
+h5 > a, 
+h6 > a {
+    color: #85D685 !important;
+    background: transparent;
+    text-decoration: none;
+    font-family: "Verdana", sans-serif;
+    border-radius: .5rem;
+    padding: 0.2rem 0.2rem;
+    margin: -0.2rem -0.2rem !important;
+    text-wrap: nowrap;
+    transform: 
+        rotate3d(1, 1, 1, 0deg)
+        matrix3d(1, 0, 0, 0, 
+                 0, 1, 0, 0, 
+                 0, 0, 1, 0, 
+                 0, 0, 0, 1);
+    transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease, border-radius 0.3s ease, box-shadow 0.3s ease;
+}
+
+article p a:hover, 
+p > a:hover, 
+li > a:hover, 
+span > a:hover,
+button > a:hover, 
+h1 > a:hover, 
+h2 > a:hover, 
+h3 > a:hover, 
+h4 > a:hover, 
+h5 > a:hover, 
+h6 > a:hover {
+    color: #fff !important;
+    background: #85D685aa;
+    border-radius: .15rem;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Add box-shadow */
+    transform: 
+        rotate3d(1, 1, 1, -1deg)
+        matrix3d(1, 0, 0, 0, 
+                 0, 1, 0, 0, 
+                 0, 0, 1, 0, 
+                 0, 0, 0, 0.97);
+}
+
+/* ######## ARTICLE ######## */
+
+article {
+    display: flex;
+    position: relative; /* Make article a positioning context */
+    container-type: inline-size; /* Make article a container */
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+
+article::before {
+    content: '';
+    position: absolute;
+    width: 105cqw; /* Relative to article width */
+    height: 100%;
+    top: 0;
+    background-image: url('https://staging4.studiooriley.com/wp-content/themes/studiooriley-theme/assets/images/studiooriley_Hexigons_Transparent_Repeat_1.png');
+    background-size: 8rem;
+    z-index: -2;
+}
+
+body {
+    margin: 0;
+    font-family: "Helvetica", sans-serif;
+    color: #fff;
+    line-height: 1.6;
+
+    background: linear-gradient(200deg,
+		#4f5bd5, /* DARKER BLUE */
+		#962fbf, /* PURPLE */
+		#4f5bd5, /* DARKER BLUE */
+		#d62976, /* DARK RED */
+		#4f5bd5, /* DARKER BLUE */
+		#009688 /* DEEP GREEN */); 
+    background-size: 1000%;
+    animation: gradient-animation 10s infinite ease-in-out;
+    animation-fill-mode: both;
+}
+
+/* ######## HEADINGS ######## */
+
+h1, 
+h2, 
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Helvetica", sans-serif;
+    margin-bottom: 1rem;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+
+h2 {
+    font-size: 1.5rem;
+}
+
+h3 {
+    font-size: 1.25rem;
+}
+
+h4 {
+    font-size: 1rem;
+}
+
+h5 {
+    font-size: 0.875rem;
+}
+
+h6 {
+    font-size: 0.75rem;
+}
+
+/* ######## NAVIGATION ######## */
+/* Epic Responsive Navigation with Container Queries and Flexbox - Adjusted for Overflow */
+
+#site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #1e1e1e; /* Dark background similar to the image */
+    color: #f0f0f0; /* Light text color */
+    position: relative; /* For absolute positioning of mobile menu */
+    overflow-x: auto; /* Enable horizontal scrolling for the header if content overflows */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  }
+  
+  .site-branding {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0; /* Prevent shrinking of the logo/title */
+  }
+  
+  .site-title a {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: inherit;
+    text-decoration: none;
+  }
+  
+  .site-description {
+    display: none; /* Hide by default, might show on larger screens */
+    margin-left: 1rem;
+    font-size: 0.9rem;
+    color: #ccc;
+    flex-shrink: 0; /* Prevent shrinking of the description */
+  }
+  
+  #site-navigation {
+    container: nav-container / inline-size; /* Define a container for queries */
+    flex-grow: 1; /* Allow navigation to take up available space */
+    display: flex; /* Enable flexbox for the navigation container */
+    justify-content: flex-end; /* Push main menu to the right */
+  }
+  
+  .main-navigation .menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0; /* Prevent shrinking of the main menu */
+  }
+  
+  .main-navigation .menu-item {
+    margin-left: 1.5rem;
+  }
+  
+  .main-navigation .menu-item:first-child {
+    margin-left: 0;
+  }
+  
+  .main-navigation a {
+    text-decoration: none;
+    color: inherit;
+    padding: 0.5rem 0;
+    display: block;
+    transition: color 0.3s ease-in-out;
+  }
+  
+  .main-navigation a:hover {
+    color: #a7ffeb; /* Highlight color on hover */
+  }
+  
+  /* Mobile Menu Button (Initially Hidden) */
+  .mobile-menu-button {
+    display: none;
+    background: none;
+    border: none;
+    color: #f0f0f0;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    flex-shrink: 0; /* Prevent shrinking of the button */
+    margin-left: 1rem; /* Add some spacing from the main navigation on larger screens */
+  }
+  
+  .mobile-menu-button:focus {
+    outline: none;
+  }
+  
+  /* Mobile Menu Styles (Initially Hidden) */
+  .mobile-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #1e1e1e;
+    padding: 1rem;
+    z-index: 10;
+    border-bottom: 1px solid #333;
+  }
+  
+  .mobile-menu .menu {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .mobile-menu .menu-item {
+    margin: 0.75rem 0;
+  }
+  
+  /* Container Queries for Responsiveness */
+  
+  /* Small screens: Show mobile menu button, hide main menu */
+  @container nav-container (max-width: 600px) {
+    .main-navigation {
+      display: none;
+    }
+  
+    .mobile-menu-button {
+      display: block;
+    }
+  
+    /* Show mobile menu when a class (e.g., 'open') is added via JavaScript */
+    .main-navigation.open + .mobile-menu {
+      display: block;
+    }
+  
+    .site-description {
+      display: none; /* Keep description hidden on small screens */
+    }
+  }
+  
+  /* Medium screens: Adjust layout, might show description */
+  @container nav-container (min-width: 601px) and (max-width: 900px) {
+    .main-navigation .menu-item {
+      margin-left: 1rem;
+    }
+  
+    .site-description {
+      display: inline; /* Show description on medium screens */
+    }
+  
+    /* Adjust mobile button position if needed */
+    .mobile-menu-button {
+      margin-left: 1rem;
+    }
+  }
+  
+  /* Large screens: Full horizontal menu */
+  @container nav-container (min-width: 901px) {
+    .mobile-menu-button {
+      display: none;
+    }
+  
+    .mobile-menu {
+      display: none !important; /* Ensure mobile menu is hidden */
+    }
+  
+    .site-description {
+      display: inline; /* Show description on large screens */
+    }
+  }
+  
+  /* --- Awesome Menu Enhancements (Optional but Recommended) --- */
+  
+  /* Add a subtle border or shadow to the header */
+  #site-header {
+    /* border-bottom: 1px solid #333; */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Style the mobile menu button for better visual appeal (example) */
+  .mobile-menu-button {
+    padding: 0.75rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .mobile-menu-button:hover {
+    background-color: #333;
+  }
+  
+  /* Add a subtle animation to the mobile menu items */
+  .mobile-menu .menu-item a {
+    opacity: 0.8;
+    transition: opacity 0.3s ease-in-out, transform 0.2s ease-out;
+    transform: translateX(-5px);
+  }
+  
+  .mobile-menu .menu-item a:hover {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  /* Active menu item styling (you'll likely need JavaScript to add an 'active' class) */
+  .main-navigation .menu-item.current-menu-item a,
+  .main-navigation .menu-item.current_page_item a,
+  .mobile-menu .menu-item.current-menu-item a,
+  .mobile-menu .menu-item.current_page_item a {
+    color: #a7ffeb;
+    font-weight: bold;
+  }
+
+/* ######## WP-BLOCK-BUTTONS ######## */
+
+.wp-block-buttons {
+    display: flex;
+    flex-direction: row;
+    place-items: center;
+    gap: 1rem;
+
+    .wp-block-button {
+        display: inline-block;
+        position: relative;
+        z-index: 10;  
+        cursor: pointer;  
+        flex: 1 1 auto;
+        padding: 1rem 2rem;  
+        background-color: #85d685;  
+        color: #fff;  
+        border: none;  
+        border-radius: 50rem;  
+        font-family: "Helvetica", sans-serif;  
+        text-align: center;  
+        text-decoration: none; 
+        transform: 
+		    rotate3d(1, 1, 1, 0deg)
+            matrix3d(1, 0, 0, 0, 
+			       0, 1, 0, 0, 
+			       0, 0, 1, 0, 
+			       0, 0, 0, 1);
+        transition: transform 0.3s ease, background-color 0.3s ease;
+        
+        .wp-block-button:hover {
+            background-color: #6dba6daa;
+            transform: 
+                rotate3d(1, 1, 1, -1deg)
+                matrix3d(1, 0, 0, 0, 
+                       0, 1, 0, 0, 
+                       0, 0, 1, 0, 
+                       0, 0, 0, 0.97);
+        }
+
+        & a.wp-block-button__link {
+            background-color: transparent;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        /* Focus state (for accessibility) */
+        button:focus, .wp-block-button a:focus {
+            outline: 2px solid #333;  /* Visible outline for keyboard navigation */
+            outline-offset: 2px;  /* Adjust outline position */
+        }
+    
+        /* Disabled buttons */
+        button:disabled, .wp-block-button a:disabled {
+            background-color: #ccc;  /* Grey background for disabled buttons */
+            cursor: not-allowed;  /* Change cursor to indicate that the button is not clickable */
+        }
+    }
+}
+
+/* ######## ENTRY-CONTENT ######## */
+
+.entry-content {
+    position: relative;
+    margin: 0 auto;
+    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    place-items: center;
+
+    & > * {
+        width: 600px;
+    }
+
+    :not(.wp-block-header) h1, 
+    :not(.wp-block-header) h2, 
+    :not(.wp-block-header) h3, 
+    :not(.wp-block-header) h4, 
+    :not(.wp-block-header) h5, 
+    :not(.wp-block-header) h6 {
+        font-family: "Helvetica", sans-serif;
+
+    }
+}
+
+/* ######### ENTRY-HEADER ######### */
+
+.entry-header {
+    display: none;
+}
+
+/* ######### HEADER ######### */
+
+#header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ######## SUBSTACK ######## */
+
+.substack-subscription-area {
+    padding: 2rem 4rem;
+}
+
+/* ######### WP-BLOCK-COLUMNS ######### */
+
+.wp-block-columns {
+    display: flex;
+    max-width: 600px; /* Or whatever max-width you've set */
+    flex-direction: row;
+    flex-wrap: wrap !important;
+    align-items: stretch;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem 0;
+
+    & > .wp-block-column:not(.substack-subscription-area) {
+        display: flex;
+        flex: 1 1 0;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+        margin-bottom: 1rem;
+        padding: 1rem;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 0.5rem;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        min-width: 150px; /* Add this line */
+        transform: 
+		    rotate3d(1, 1, 1, 0deg)
+            matrix3d(1, 0, 0, 0, 
+			       0, 1, 0, 0, 
+			       0, 0, 1, 0, 
+			       0, 0, 0, 1);
+        transition: transform 0.3s ease;
+    }
+
+    & > .wp-block-column:hover:not(.substack-subscription-area) {
+        transform: 
+		    rotate3d(1, 1, 1, -1deg)
+            matrix3d(1, 0, 0, 0, 
+			       0, 1, 0, 0, 
+			       0, 0, 1, 0, 
+			       0, 0, 0, 0.96);
+        
+    }
+}
+
+/* ######### WP-BLOCK-COVER ######### */
+
+.wp-block-cover {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    margin: 0;
+    overflow: hidden;
+    z-index: 0; /* Set to 0 so it stays behind the content */
+    background-size: cover;
+    background-position: center;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        min-width: 66vw;
+        position: relative;
+        left: calc(-33vw + 50%);
+    }
+
+    .wp-block-cover__inner-container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 auto;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        width: 100%;
+        min-height: 100vh;
+        height: 100%;
+        z-index: 1; /* Keep this above the cover image */
+        max-width: 600px;
+    }
+    
+    *:not(img) {
+        max-width: 600px;
+        margin: .5rem auto;
+        color: #fff;
+    }
+    
+    img {
+        position: absolute;
+        width: 120vw;
+        height: 120vw;
+        object-fit: cover;
+    }
+    
+    span {
+        display: none;
+    }
+}
+
+.wp-block-cover::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 0; /* Ensure this overlay stays behind the content */
+}
+
+.wp-block-cover + * {
+    margin-top: 100vh;
+}
+
+/* ######## FOOTER ######## */
+
+.site-footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 2rem;
+    margin-top: 2rem;
+    position: relative;
+
+    .footer-content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: flex-start;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 1rem;
+    }
+    
+    .footer-column {
+        flex: 1 1 auto;
+        min-width: 200px;
+        padding: 1rem;
+    }
+    
+    h4 {
+        font-size: 1.2rem;
+    }
+    
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    ul li {
+        margin-bottom: 0.5rem;
+    }
+    
+    p {
+        margin-top: 1rem;
+        font-size: 0.875rem;
+        color: #aaa;
+    }
+}
+
+/* FRM_FORMS -----------------*/
+
+form, form label, form span, form .um-field-area * {
+	color: #ffffff !important;
+}
+
+/* FRM_FORMS -----------------*/
+
+.frm_forms {
+	width: 90vw;
+	margin: auto;
+}
+
+.frm_forms .frm_primary_label, .frm_forms label {
+	color: #ffffff !important;
+}
+
+/* ASIDE ---------------------*/
+
+.aside {
+	background: #ECFFD2;
+	color: #A2E34B;
+	text-shadow: 2px 1px #73A233;
+	margin-top: 3rem;
+	padding: 1rem 5rem;
+	border: .4rem #A2E34B dotted;
+	border-radius: 2rem;
+	border-spacing: 1px 3px 40px;
+	box-shadow: 5px 5px 8px 0px #00000010;
+	transform: 
+		rotate3d(1, 1, 1, 0deg)
+    matrix3d(1, 0, 0, 0, 
+			       0, 1, 0, 0, 
+			       0, 0, 1, 0, 
+			       0, 0, 0, 1);
+	transition: transform .5s;
+}
+
+.aside:hover {
+	transform: 
+		rotate3d(1, 1, 1, -1deg)
+    matrix3d(1, 0, 0, 0, 
+			       0, 1, 0, 0, 
+			       0, 0, 1, 0, 
+			       0, 0, 0, 1.02);
+}
+
+/* ######### SO HIGHLIGHTS ######### */
+
+.so-highlight-container > * {
+	
+	border: none !important;
+}
+
+.so-highlight {
+	display: flex;
+	max-width: 25ch;
+	max-height: 7rem;
+	margin: auto !important;
+	padding: 1rem;
+	color: #ffffff;
+	font-weight: 900;
+	border: 5px solid #ffffff;
+	border-radius: 1rem;
+}
+
+/* ######### SUBSTACK EMBED ######### */
+
+.substack-subscription-area h2 {
+	font-size: 1.5rem;
+}
+
+
+.substack-subscription-area h2,
+.substack-subscription-area p,
+.substack-subscription-area a {
+	position: relative;
+	color: #ffffff;
+	min-width: 90%;
+	margin: 1rem auto;
+	text-align: center;
+}
+
+#custom-substack-embed {
+	display: flex;
+	margin: auto;
+	margin-bottom: 2rem !important;
+	place-content: center;
+}
+
+.wp-block-columns:has(.substack-subscription-area) {
+  background: linear-gradient(200deg, 
+		#d62976, /* DARK RED */
+		#962fbf, /* PURPLE */
+		#4f5bd5, /* DARKER BLUE */
+		#009688 /* DEEP GREEN */); 
+  background-size: 400%;
+	border-radius: 2rem;
+	box-shadow:  5px 5px 10px 0px #00000030;
+  animation: gradient-animation 10s infinite ease-in-out;
+  animation-fill-mode: both;
+}
+
+/* ######### SO-NICHES ######### */
+
+.so-niches {
+
+    /* ######## text styles ######## */
+    /* background: linear-gradient(200deg, 
+		#d62976,
+		#962fbf,
+		#4f5bd5,
+		#009688);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; */
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* ################################# */
+/* ##### PAGE-SPECIFIC STYLES ###### */
+/* ################################# */
+
+/* ########### HOME PAGE ########### */
+
+.page-id-1338 .entry-content > *:first-child {
+    position: relative;
+    container-type: inline-size; /* Make this a container as well */
+}
+
+.page-id-1338 .entry-content > *:first-child::after {
+    content: '';
+    position: absolute;
+    top: -75cqw; /* Adjusted top value, relative to .page-id-1338 .entry-content > *:first-child */
+    left: -100cqw; /* Adjusted left value, relative to .page-id-1338 .entry-content > *:first-child */
+    width: 300cqw; /* Adjusted width value, relative to .page-id-1338 .entry-content > *:first-child */
+    height: 300cqw; /* Adjusted height value, relative to .page-id-1338 .entry-content > *:first-child */
+    transform: translate(0, 0);
+    background-image: url('https://staging4.studiooriley.com/wp-content/themes/studiooriley-theme/assets/images/studiooriley_Starry_Sky_Vector_Circle.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 1;
+    z-index: -1;
+
+    /* Apply the radial gradient mask */
+    -webkit-mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 25%, rgba(0, 0, 0, 0.4) 45%, rgba(0, 0, 0, 0) 65%);
+    mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 25%, rgba(0, 0, 0, 0.4) 45%, rgba(0, 0, 0, 0) 65%);
+
+    animation: slow-rotation 300s infinite;
+}
+
+/* ################################# */
+/* ########## ANIMATIONS ########### */
+/* ################################# */
+
+@keyframes slow-rotation {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
+  }
+
+@keyframes gradient-animation {
+    0% {
+        background-position: 0% center;
+    }
+    50% {
+      background-position: 100% center;
+    }
+}
+
+@keyframes pop-out {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* ################################# */
+/* ######## UTILITY CLASSES ######## */
+/* ################################# */
+
+/*
+GRADIENT TEXT STYLES
+
+background: radial-gradient(#c9fbff, #8bffcd, #60efff);
+background-clip: text;
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+
+*/
+
+.slow-rotation > .wp-block-cover__image-background {
+    animation: slow-rotation 100s linear infinite;
+}
