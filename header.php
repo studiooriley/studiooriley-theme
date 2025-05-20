@@ -11,14 +11,17 @@
 <body <?php body_class(); ?>>
     <header id="site-header">
         <div class="site-branding">
-            <?php if (has_custom_logo()) {
-                the_custom_logo();
-            } else { ?>
-                <h1 class="site-title">
-                    <a href="<?php echo esc_url(home_url('/')); ?>" rel="home"><?php bloginfo('name'); ?></a>
-                </h1>
-                <p class="site-description"><?php bloginfo('description'); ?></p>
-            <?php } ?>
+            <!-- Logo shown on every page -->
+            <a href="<?php echo esc_url(home_url('/')); ?>" class="nav-logo">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/studiooriley_logotype.png" alt="Studio O'Riley Logo">
+            </a>
+
+            <!-- Hidden site title for SEO and accessibility -->
+            <h1 class="site-title">
+                <a href="<?php echo esc_url(home_url('/')); ?>" rel="home"><?php bloginfo('name'); ?></a>
+            </h1>
+
+            <p class="site-description"><?php bloginfo('description'); ?></p>
         </div>
 
         <nav id="site-navigation" class="main-navigation">

@@ -18,6 +18,9 @@ function my_theme_setup()
     // Add support for Featured Images (Post Thumbnails)
     add_theme_support('post-thumbnails');
 
+    // Declare image sizes
+    add_image_size('post-thumbnail', 1200, 630, true); // or your preferred dimensions
+
     // Add support for Custom Logo
     add_theme_support('custom-logo');
 
@@ -42,3 +45,11 @@ function my_theme_widgets_init()
     ));
 }
 add_action('widgets_init', 'my_theme_widgets_init');
+
+// REMOVE THIS THE BELOW FUNCTION IF [...] STILL APPEARS AFTER BLOG POST EXERPTS
+
+function custom_excerpt_more($more)
+{
+    return '…'; // plain ellipsis, no brackets or link
+}
+add_filter('excerpt_more', 'custom_excerpt_more');

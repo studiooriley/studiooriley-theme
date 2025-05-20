@@ -1,5 +1,7 @@
 <?php get_header(); ?>
 
+<!-- DEBUG: SINGLE.PHP is being used -->
+
 <main id="main-content">
     <section id="primary" class="content-area">
         <div id="content" class="site-content">
@@ -12,7 +14,11 @@
                         <header class="entry-header">
                             <?php if (has_post_thumbnail()) : ?>
                                 <div class="post-thumbnail">
-                                    <?php the_post_thumbnail(); ?>
+                                    <?php
+                                    if (has_post_thumbnail()) {
+                                        echo get_the_post_thumbnail(null, 'full');
+                                    }
+                                    ?>
                                 </div>
                             <?php endif; ?>
                             <h1 class="entry-title"><?php the_title(); ?></h1>
